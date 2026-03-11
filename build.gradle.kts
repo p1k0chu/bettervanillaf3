@@ -1,5 +1,6 @@
 plugins {
     id("fabric-loom") version "1.14-SNAPSHOT"
+    id("com.modrinth.minotaur") version "2.+"
 }
 
 val minecraftVersion = project.property("minecraft_version") as String
@@ -57,6 +58,19 @@ tasks.jar {
     from("LICENSE") {
         rename { "${it}_$modId" }
     }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "m2IluZHV"
+    syncBodyFrom = rootProject.file("README.md").readText()
+
+    versionNumber = "$version-mc$minecraftVersion"
+    versionType = "release" // `release`, `beta` or `alpha`
+    gameVersions.add(minecraftVersion)
+
+    uploadFile.set(tasks.remapJar)
+    loaders.add("fabric")
 }
 
 tasks.test {
