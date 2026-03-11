@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "io.github.p1k0chu.nostalgic_f3.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
