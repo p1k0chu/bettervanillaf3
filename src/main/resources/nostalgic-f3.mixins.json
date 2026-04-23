@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "io.github.p1k0chu.nostalgic_f3.mixin",
-  "compatibilityLevel": "JAVA_25",
+  "compatibilityLevel": "${java}",
   "mixins": [
   ],
   "injectors": {

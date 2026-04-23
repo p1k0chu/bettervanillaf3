@@ -32,7 +32,7 @@ public class DebugScreenOverlayMixin {
 
     @Inject(method = "extractRenderState", at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/ArrayList;"))
     void groupsGoToTheRight(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local Map<Identifier, Collection<String>> map, @Local(ordinal = 1) List<String> right) {
-        map.forEach((_, strings) -> {
+        map.forEach((ignore, strings) -> {
             right.addAll(strings);
             right.add("");
         });

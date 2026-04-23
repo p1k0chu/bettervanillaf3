@@ -23,6 +23,7 @@ public final class DebugScreenEntriesSides {
             Identifier.withDefaultNamespace("heightmap"), // CH + SH
             Identifier.withDefaultNamespace("biome"),
             Identifier.withDefaultNamespace("local_difficulty"),
+            Identifier.withDefaultNamespace("day_count"),
             Identifier.withDefaultNamespace("chunk_generation_stats"), // noise router + biome builder
             Identifier.withDefaultNamespace("entity_spawn_counts"), // SC
             Identifier.withDefaultNamespace("sound_mood"),
