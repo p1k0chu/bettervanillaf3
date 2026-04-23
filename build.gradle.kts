@@ -1,13 +1,14 @@
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
 
 plugins {
-    id("com.modrinth.minotaur") version "2.+"
+    id("me.modmuss50.mod-publish-plugin") version "1.0.+"
 }
 
 val obfuscated = sc.current.parsed < "26.1"
 plugins.apply(if(obfuscated) "net.fabricmc.fabric-loom-remap" else "net.fabricmc.fabric-loom")
 val loom = the<LoomGradleExtensionAPI>()
 val modImplementation = if(obfuscated) configurations.named("modImplementation") else configurations.implementation
+val modJar = if(obfuscated) tasks.named<Zip>("remapJar") else tasks.named<Zip>("jar")
 
 version = "${property("mod_version")}+${sc.current.version}"
 
@@ -47,9 +48,8 @@ tasks.processResources {
 }
 
 tasks.register<Copy>("buildAndCollect") {
-    val modJar = if(obfuscated) tasks.named<Zip>("remapJar") else tasks.named<Zip>("jar")
     group = "build"
-    from(modJar.map { it.archiveFile } /*, remapSourcesJar.map { it.archiveFile }*/)
+    from(modJar.flatMap { it.archiveFile } /*, remapSourcesJar.map { it.archiveFile }*/)
     into(rootProject.layout.buildDirectory.file("libs"))
     dependsOn("build")
 }
@@ -66,26 +66,27 @@ extensions.configure<LoomGradleExtensionAPI>() {
 }
 
 java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
     withSourcesJar()
     val j = JavaVersion.valueOf("VERSION_${project.property("java_version")}")
     targetCompatibility = j
     sourceCompatibility = j
 }
 
-modrinth {
-    token = System.getenv("MODRINTH_TOKEN")
-    projectId = "m2IluZHV"
-    syncBodyFrom = rootProject.file("README.md").readText()
+publishMods {
+    file = modJar.flatMap { it.archiveFile }
+    displayName = "${property("mod_version")} for ${sc.current.version}"
+    version = property("mod_version") as String
+    changelog = rootProject.file("CHANGELOG.md").readText()
+    type = STABLE
+    modLoaders.add("fabric")
 
-    versionNumber = "$version"
-    versionType = "release" // `release`, `beta` or `alpha`
-    gameVersions.add(sc.current.version)
+    dryRun = providers.environmentVariable("MODRINTH_TOKEN").getOrNull() == null
 
-    uploadFile.set(tasks.jar)
-    loaders.add("fabric")
+    modrinth {
+        projectId = "m2IluZHV"
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        minecraftVersions.addAll(property("minecraft_targets_publishing").toString().split(' '))
+    }
 }
 
 tasks.test {
