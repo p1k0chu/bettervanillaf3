@@ -38,8 +38,8 @@ public final class DebugScreenEntriesSides {
             Identifier.withDefaultNamespace("gpu_utilization"),
             Identifier.withDefaultNamespace("simple_performance_impactors"),
 
-            Identifier.withDefaultNamespace("looking_at_block"),
-            Identifier.withDefaultNamespace("looking_at_fluid"),
+            Identifier.withDefaultNamespace("looking_at_block" /*? >=26.1 >> ')' */ + "_state"),
+            Identifier.withDefaultNamespace("looking_at_fluid" /*? >=26.1 >> ')' */ + "_state"),
             Identifier.withDefaultNamespace("looking_at_entity")
     );
 
