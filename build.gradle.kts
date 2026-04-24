@@ -1,7 +1,7 @@
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
 
 plugins {
-    id("me.modmuss50.mod-publish-plugin") version "1.0.+"
+    id("me.modmuss50.mod-publish-plugin") version "1.1.0"
 }
 
 val obfuscated = sc.current.parsed < "26.1"
@@ -100,6 +100,12 @@ publishMods {
         projectId = "m2IluZHV"
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
         minecraftVersions.addAll(property("minecraft_targets_publishing").toString().split(' '))
+        requires {
+            slug = "yacl"
+        }
+        optional {
+            slug = "modmenu"
+        }
     }
 }
 
