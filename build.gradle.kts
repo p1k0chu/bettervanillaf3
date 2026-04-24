@@ -18,11 +18,21 @@ base {
 
 repositories {
     mavenCentral()
+    // YACL
+    maven("https://maven.isxander.dev/releases") {
+        name = "Xander Maven"
+    }
+    // Mod Menu
+    maven("https://maven.terraformersmc.com/") {
+        name = "Terraformers"
+    }
 }
 
 dependencies {
     "minecraft"("com.mojang:minecraft:${sc.current.version}")
     modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
+    modImplementation("dev.isxander:yet-another-config-lib:${property("yacl_version")}")
+    modImplementation("com.terraformersmc:modmenu:${property("modmenu_version")}")
 
     if (obfuscated) {
         "mappings"(loom.officialMojangMappings())
@@ -34,12 +44,16 @@ tasks.processResources {
     inputs.property("minecraft_range", project.property("minecraft_range"))
     inputs.property("loader_version", project.property("loader_version"))
     inputs.property("java_version", project.property("java_version"))
+    inputs.property("yacl_version", project.property("yacl_version"))
+    inputs.property("modmenu_version", project.property("modmenu_version"))
 
     filesMatching("fabric.mod.json") {
         expand(
             "version" to inputs.properties.getValue("mod_version"),
             "loader_version" to inputs.properties.getValue("loader_version"),
-            "minecraft_version" to inputs.properties.getValue("minecraft_range")
+            "minecraft_range" to inputs.properties.getValue("minecraft_range"),
+            "yacl_version" to inputs.properties.getValue("yacl_version"),
+            "modmenu_version" to inputs.properties.getValue("modmenu_version")
         )
     }
 

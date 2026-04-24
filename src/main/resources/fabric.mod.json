@@ -14,6 +14,9 @@
   "license": "MIT",
   "environment": "*",
   "entrypoints": {
+    "modmenu": [
+      "io.github.p1k0chu.nostalgic_f3.client.NostalgicF3ModMenuIntegration"
+    ]
   },
   "mixins": [
     "nostalgic-f3.mixins.json",
@@ -24,6 +27,10 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": ">=${minecraft_version}"
+    "minecraft": "${minecraft_range}",
+    "yet_another_config_lib_v3": ">=${yacl_version}"
+  },
+  "recommends": {
+    "modmenu": ">=${modmenu_version}"
   }
 }

@@ -2,6 +2,7 @@ package io.github.p1k0chu.nostalgic_f3.client.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import io.github.p1k0chu.nostalgic_f3.client.NostalgicF3Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.debug.DebugEntryPosition;
 import net.minecraft.client.gui.components.debug.DebugScreenDisplayer;
@@ -25,9 +26,8 @@ public class DebugEntryPositionMixin {
 
     @WrapOperation(method = "display", at = @At(value = "INVOKE", target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;", ordinal = 1))
     String addChunkRelativePos(Locale l, String format, Object[] args, Operation<String> original) {
-        var entity = Minecraft.getInstance().getCameraEntity();
-        if (entity != null) {
-            var blockPos = entity.blockPosition();
+        if (NostalgicF3Config.getInstance().isUseOldSectionRelativePos() && Minecraft.getInstance().getCameraEntity() != null) {
+            var blockPos = Minecraft.getInstance().getCameraEntity().blockPosition();
             return String.format(
                     "%s [%d %d %d]",
                     original.call(l, format, args),
