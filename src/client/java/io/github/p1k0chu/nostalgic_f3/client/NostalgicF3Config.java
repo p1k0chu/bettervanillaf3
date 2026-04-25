@@ -1,9 +1,7 @@
 package io.github.p1k0chu.nostalgic_f3.client;
 
-import dev.isxander.yacl3.api.ConfigCategory;
-import dev.isxander.yacl3.api.Option;
-import dev.isxander.yacl3.api.OptionDescription;
-import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
@@ -32,6 +30,12 @@ public class NostalgicF3Config {
 
     @SerialEntry
     private boolean hideOverlayWhenF1 = false;
+
+    @SerialEntry
+    private float pieChartScale = 1.0f;
+
+    @SerialEntry
+    private boolean disabledPieChartBg = false;
 
     //? >=26.1 {
     @SerialEntry
@@ -89,6 +93,39 @@ public class NostalgicF3Config {
                                                 .build()
                                 )
                                 //? }
+                                .group(
+                                        OptionGroup.createBuilder()
+                                                .name(Component.literal("Pie Chart"))
+                                                .option(
+                                                        Option.<Float>createBuilder()
+                                                                .name(Component.literal("Debug Pie Chart scale"))
+                                                                .description(OptionDescription.of(Component.literal("Change the scale of the Pie Chart in Debug Overlay")))
+                                                                .binding(
+                                                                        1.0f,
+                                                                        this::getPieChartScale,
+                                                                        this::setPieChartScale
+                                                                )
+                                                                .controller(
+                                                                        option -> FloatSliderControllerBuilder.create(option)
+                                                                                .range(0.1f, 2.0f)
+                                                                                .step(0.1f)
+                                                                )
+                                                                .build()
+                                                )
+                                                .option(
+                                                        Option.<Boolean>createBuilder()
+                                                                .name(Component.literal("Disable Pie Chart background"))
+                                                                .description(OptionDescription.of(Component.literal("Disable the semi-transparent gray background of the profiler pie chart")))
+                                                                .binding(
+                                                                        false,
+                                                                        this::isDisabledPieChartBg,
+                                                                        this::setDisabledPieChartBg
+                                                                )
+                                                                .controller(TickBoxControllerBuilder::create)
+                                                                .build()
+                                                )
+                                                .build()
+                                )
                                 .build()
                 )
                 .save(HANDLER::save)
@@ -114,6 +151,22 @@ public class NostalgicF3Config {
 
     public void setHideOverlayWhenF1(boolean hideOverlayWhenF1) {
         this.hideOverlayWhenF1 = hideOverlayWhenF1;
+    }
+
+    public float getPieChartScale() {
+        return pieChartScale;
+    }
+
+    public void setPieChartScale(float pieChartScale) {
+        this.pieChartScale = pieChartScale;
+    }
+
+    public boolean isDisabledPieChartBg() {
+        return disabledPieChartBg;
+    }
+
+    public void setDisabledPieChartBg(boolean disabledPieChartBg) {
+        this.disabledPieChartBg = disabledPieChartBg;
     }
 
     //? >=26.1 {

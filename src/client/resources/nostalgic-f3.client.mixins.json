@@ -8,6 +8,8 @@
     "DebugScreenOverlayAnon1Mixin",
     "DebugScreenOverlayMixin",
     "GameRendererMixin",
+    "GuiProfilerChartRenderStateMixin",
+    "ProfilerPieChartMixin",
     "LevelRendererMixin"
   ],
   "injectors": {
