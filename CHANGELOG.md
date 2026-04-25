@@ -1,6 +1,4 @@
-p1k0chu (5):
-      Fix: rename looking_at_block/fluid in >=26.1
-      Add config using yacl and mod menu
-      Option to add day count after local difficulty
-      Option to hide debug overlay when hud is hidden even in menu
-      Option to add old section relative pos
+* relicense to LGPL 3.0 or later
+* fix the config not loading
+* add options to scale the pie chart and remove bg
+* rename the mod to Better Vanilla F3
