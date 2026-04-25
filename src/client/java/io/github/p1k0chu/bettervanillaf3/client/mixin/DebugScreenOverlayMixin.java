@@ -1,8 +1,8 @@
-package io.github.p1k0chu.nostalgic_f3.client.mixin;
+package io.github.p1k0chu.bettervanillaf3.client.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import io.github.p1k0chu.nostalgic_f3.client.DebugScreenEntriesSides;
-import io.github.p1k0chu.nostalgic_f3.client.SidedDebugScreenDisplayer;
+import io.github.p1k0chu.bettervanillaf3.client.DebugScreenEntriesSides;
+import io.github.p1k0chu.bettervanillaf3.client.SidedDebugScreenDisplayer;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.DebugScreenOverlay;
 import net.minecraft.client.gui.components.debug.DebugScreenDisplayer;
@@ -22,7 +22,7 @@ import java.util.Map;
 class DebugScreenOverlayMixin {
     @Inject(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/debug/DebugScreenEntry;display(Lnet/minecraft/client/gui/components/debug/DebugScreenDisplayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/chunk/LevelChunk;)V"))
     private void setSide(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local Identifier identifier, @Local DebugScreenDisplayer displayer) {
-        ((SidedDebugScreenDisplayer) displayer).nostalgic_f3$setSide(DebugScreenEntriesSides.getSide(identifier));
+        ((SidedDebugScreenDisplayer) displayer).bettervanillaf3$setSide(DebugScreenEntriesSides.getSide(identifier));
     }
 
     @Redirect(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/ArrayList;"))

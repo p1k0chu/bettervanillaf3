@@ -1,6 +1,6 @@
-package io.github.p1k0chu.nostalgic_f3.client.mixin;
+package io.github.p1k0chu.bettervanillaf3.client.mixin;
 
-import io.github.p1k0chu.nostalgic_f3.client.NostalgicF3Config;
+import io.github.p1k0chu.bettervanillaf3.client.BetterVanillaF3Config;
 //? >=26.1 {
 import net.minecraft.client.renderer.state.gui.pip.GuiProfilerChartRenderState;
 //? } else
@@ -14,6 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 class GuiProfilerChartRenderStateMixin {
     @Inject(method = "scale", at = @At("RETURN"), cancellable = true)
     private void modifyScale(CallbackInfoReturnable<Float> cir) {
-        cir.setReturnValue(NostalgicF3Config.getInstance().getPieChartScale() * cir.getReturnValueF());
+        cir.setReturnValue(BetterVanillaF3Config.getInstance().getPieChartScale() * cir.getReturnValueF());
     }
 }

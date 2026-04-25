@@ -1,4 +1,4 @@
-package io.github.p1k0chu.nostalgic_f3.client.mixin;
+package io.github.p1k0chu.bettervanillaf3.client.mixin;
 
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.resource.GraphicsResourceAllocator;

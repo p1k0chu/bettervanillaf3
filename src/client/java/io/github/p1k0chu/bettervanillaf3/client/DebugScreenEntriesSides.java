@@ -1,4 +1,4 @@
-package io.github.p1k0chu.nostalgic_f3.client;
+package io.github.p1k0chu.bettervanillaf3.client;
 
 import net.minecraft.resources.Identifier;
 

@@ -1,11 +1,11 @@
-package io.github.p1k0chu.nostalgic_f3.client.mixin;
+package io.github.p1k0chu.bettervanillaf3.client.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import io.github.p1k0chu.nostalgic_f3.client.NostalgicF3Config;
+import io.github.p1k0chu.bettervanillaf3.client.BetterVanillaF3Config;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.debugchart.ProfilerPieChart;
 import net.minecraft.util.profiling.ResultField;
@@ -21,7 +21,7 @@ class ProfilerPieChartMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;fill(IIIII)V")
     )
     private boolean hidePieChartBg(GuiGraphicsExtractor instance, int x0, int y0, int x1, int y1, int col) {
-        return !NostalgicF3Config.getInstance().isDisabledPieChartBg();
+        return !BetterVanillaF3Config.getInstance().isDisabledPieChartBg();
     }
 
     /*
@@ -32,7 +32,7 @@ class ProfilerPieChartMixin {
     @WrapMethod(method = /*$ extractRenderStateStr >> ')' */"extractRenderState")
     private void scalePieChartText(GuiGraphicsExtractor graphics, Operation<Void> original) {
         graphics.pose().pushMatrix()
-                .scale(NostalgicF3Config.getInstance().getPieChartScale());
+                .scale(BetterVanillaF3Config.getInstance().getPieChartScale());
         try {
             original.call(graphics);
         } finally {
@@ -50,7 +50,7 @@ class ProfilerPieChartMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;guiWidth()I")
     )
     private int unscaleGuiWidth(int original) {
-        return Math.round(original / NostalgicF3Config.getInstance().getPieChartScale());
+        return Math.round(original / BetterVanillaF3Config.getInstance().getPieChartScale());
     }
 
     @ModifyExpressionValue(
@@ -58,7 +58,7 @@ class ProfilerPieChartMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;guiHeight()I")
     )
     private int unscaleGuiHeight(int original) {
-        return Math.round(original / NostalgicF3Config.getInstance().getPieChartScale());
+        return Math.round(original / BetterVanillaF3Config.getInstance().getPieChartScale());
     }
 
     /*
@@ -83,10 +83,10 @@ class ProfilerPieChartMixin {
         original.call(
                 instance,
                 chartData,
-                (int) (x0 * NostalgicF3Config.getInstance().getPieChartScale()),
-                (int) (y0 * NostalgicF3Config.getInstance().getPieChartScale()),
-                (int) (x1 * NostalgicF3Config.getInstance().getPieChartScale()),
-                (int) (y1 * NostalgicF3Config.getInstance().getPieChartScale())
+                (int) (x0 * BetterVanillaF3Config.getInstance().getPieChartScale()),
+                (int) (y0 * BetterVanillaF3Config.getInstance().getPieChartScale()),
+                (int) (x1 * BetterVanillaF3Config.getInstance().getPieChartScale()),
+                (int) (y1 * BetterVanillaF3Config.getInstance().getPieChartScale())
         );
     }
 }

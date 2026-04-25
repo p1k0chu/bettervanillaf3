@@ -26,4 +26,4 @@ stonecutter {
     }
 }
 
-rootProject.name = "nostalgic-f3"
+rootProject.name = "bettervanillaf3"

@@ -1,6 +1,6 @@
-package io.github.p1k0chu.nostalgic_f3.client.mixin;
+package io.github.p1k0chu.bettervanillaf3.client.mixin;
 
-import io.github.p1k0chu.nostalgic_f3.client.DebugScreenEntriesSides;
+import io.github.p1k0chu.bettervanillaf3.client.DebugScreenEntriesSides;
 import net.minecraft.client.gui.components.debug.DebugScreenEntryList;
 import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;

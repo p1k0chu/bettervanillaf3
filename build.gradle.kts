@@ -13,7 +13,7 @@ val modJar = if(obfuscated) tasks.named<Zip>("remapJar") else tasks.named<Zip>("
 version = "${property("mod_version")}+${sc.current.version}"
 
 base {
-    archivesName = "nostalgic_f3"
+    archivesName = "bettervanillaf3"
 }
 
 repositories {
@@ -72,7 +72,7 @@ extensions.configure<LoomGradleExtensionAPI>() {
     splitEnvironmentSourceSets()
 
     mods {
-        create("nostalgic-f3") {
+        create("bettervanillaf3") {
             sourceSet(sourceSets["main"])
             sourceSet(sourceSets["client"])
         }

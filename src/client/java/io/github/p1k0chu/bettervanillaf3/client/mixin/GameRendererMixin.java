@@ -1,9 +1,9 @@
-package io.github.p1k0chu.nostalgic_f3.client.mixin;
+package io.github.p1k0chu.bettervanillaf3.client.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import io.github.p1k0chu.nostalgic_f3.client.NostalgicF3Config;
+import io.github.p1k0chu.bettervanillaf3.client.BetterVanillaF3Config;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -32,7 +32,7 @@ class GameRendererMixin {
             @Local/*? >=26.1 >>+ ')'*/(name = "graphics") GuiGraphicsExtractor graphics
     ) {
         if (!(this.minecraft.screen instanceof DebugOptionsScreen)) {
-            if (NostalgicF3Config.getInstance().isHideOverlayWhenF1() && this.minecraft.options.hideGui) {
+            if (BetterVanillaF3Config.getInstance().isHideOverlayWhenF1() && this.minecraft.options.hideGui) {
                 return;
             }
             //? if <26.1 {

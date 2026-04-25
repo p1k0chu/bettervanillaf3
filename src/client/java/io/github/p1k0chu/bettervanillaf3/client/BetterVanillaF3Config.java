@@ -1,4 +1,4 @@
-package io.github.p1k0chu.nostalgic_f3.client;
+package io.github.p1k0chu.bettervanillaf3.client;
 
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
@@ -14,12 +14,12 @@ import net.minecraft.resources.Identifier;
 //$ NullableImport
 import org.jspecify.annotations.Nullable;
 
-public class NostalgicF3Config {
-    public static final ConfigClassHandler<NostalgicF3Config> HANDLER = ConfigClassHandler.createBuilder(NostalgicF3Config.class)
-            .id(Identifier.fromNamespaceAndPath(NostalgicF3Client.MOD_ID, "config"))
+public class BetterVanillaF3Config {
+    public static final ConfigClassHandler<BetterVanillaF3Config> HANDLER = ConfigClassHandler.createBuilder(BetterVanillaF3Config.class)
+            .id(Identifier.fromNamespaceAndPath(BetterVanillaF3Client.MOD_ID, "config"))
             .serializer(
                     config -> GsonConfigSerializerBuilder.create(config)
-                            .setPath(FabricLoader.getInstance().getConfigDir().resolve("nostalgic_f3_config.json5"))
+                            .setPath(FabricLoader.getInstance().getConfigDir().resolve("bettervanillaf3_config.json5"))
                             .setJson5(true)
                             .build()
             )
@@ -44,7 +44,7 @@ public class NostalgicF3Config {
 
     public Screen makeScreen(@Nullable Screen parent) {
         return YetAnotherConfigLib.createBuilder()
-                .title(Component.literal("Nostalgic f3 config"))
+                .title(Component.literal("BetterVanillaF3 config"))
                 .category(
                         ConfigCategory.createBuilder()
                                 .name(Component.literal("Config"))
@@ -141,7 +141,7 @@ public class NostalgicF3Config {
         this.useOldSectionRelativePos = useOldSectionRelativePos;
     }
 
-    public static NostalgicF3Config getInstance() {
+    public static BetterVanillaF3Config getInstance() {
         return HANDLER.instance();
     }
 

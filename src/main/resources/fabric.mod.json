@@ -1,30 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "nostalgic-f3",
+  "id": "bettervanillaf3",
   "version": "${version}",
-  "name": "Nostalgic f3",
-  "description": "Bring back old f3 order!",
+  "name": "Better Vanilla F3",
+  "description": "Fixes and consistency for 1.21.9+ debug overlay",
   "authors": [
     "p1k0chu"
   ],
   "contact": {
-    "homepage": "https://github.com/p1k0chu/nostalgic-f3",
-    "sources": "https://github.com/p1k0chu/nostalgic-f3"
+    "homepage": "https://github.com/p1k0chu/bettervanillaf3",
+    "sources": "https://github.com/p1k0chu/bettervanillaf3"
   },
+  "icon": "assets/bettervanillaf3/icon.png",
   "license": "LGPL-3.0-or-later",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "io.github.p1k0chu.nostalgic_f3.client.NostalgicF3Client"
+      "io.github.p1k0chu.bettervanillaf3.client.BetterVanillaF3Client"
     ],
     "modmenu": [
-      "io.github.p1k0chu.nostalgic_f3.client.NostalgicF3ModMenuIntegration"
+      "io.github.p1k0chu.bettervanillaf3.client.BetterVanillaF3ModMenuIntegration"
     ]
   },
   "mixins": [
-    "nostalgic-f3.mixins.json",
+    "bettervanillaf3.mixins.json",
     {
-      "config": "nostalgic-f3.client.mixins.json",
+      "config": "bettervanillaf3.client.mixins.json",
       "environment": "client"
     }
   ],

@@ -1,8 +1,8 @@
-package io.github.p1k0chu.nostalgic_f3.client.mixin;
+package io.github.p1k0chu.bettervanillaf3.client.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import io.github.p1k0chu.nostalgic_f3.client.SidedDebugScreenDisplayer;
+import io.github.p1k0chu.bettervanillaf3.client.SidedDebugScreenDisplayer;
 import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.*;
 
@@ -59,7 +59,7 @@ abstract class DebugScreenOverlayAnon1Mixin implements SidedDebugScreenDisplayer
     }
 
     @Override
-    public void nostalgic_f3$setSide(@Nullable Side side) {
+    public void bettervanillaf3$setSide(@Nullable Side side) {
         this.side = side;
     }
 }

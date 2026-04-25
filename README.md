@@ -1,4 +1,4 @@
-# nostalgic-f3
+# Better Vanilla F3
 
 Opinionated mod to bring back the usual familiar f3 order of things.
 

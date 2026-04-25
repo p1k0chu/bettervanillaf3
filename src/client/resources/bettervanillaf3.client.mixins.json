@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "io.github.p1k0chu.nostalgic_f3.client.mixin",
+  "package": "io.github.p1k0chu.bettervanillaf3.client.mixin",
   "client": [
     "DebugEntryLocalDifficultyMixin",
     "DebugEntryPositionMixin",
