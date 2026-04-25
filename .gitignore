@@ -40,6 +40,7 @@ replay_pid*
 
 .idea
 /run
+/versions/*/run
 
 !**/src/**/build/
 
