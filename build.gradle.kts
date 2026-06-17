@@ -13,7 +13,7 @@ val modJar = if(obfuscated) tasks.named<Zip>("remapJar") else tasks.named<Zip>("
 version = "${property("mod_version")}+${sc.current.version}"
 
 base {
-    archivesName = "bettervanillaf3"
+    archivesName = rootProject.name
 }
 
 repositories {
@@ -40,24 +40,18 @@ dependencies {
 }
 
 tasks.processResources {
-    inputs.property("mod_version", project.property("mod_version"))
-    inputs.property("minecraft_version", project.property("fmj.minecraft"))
-    inputs.property("loader_version", project.property("fmj.fabric_loader"))
+    val props = mapOf(
+        "version" to project.property("mod_version"),
+        "fabric_loader" to project.property("fmj.fabric_loader"),
+        "minecraft" to project.property("fmj.minecraft"),
+        "yacl" to project.property("fmj.yacl_version"),
+        "modmenu" to project.property("fmj.modmenu_version")
+    )
+    props.forEach { k, v -> inputs.property(k, v) }
+    filesMatching("fabric.mod.json") { expand(props) }
+
+    val mixinJava = "JAVA_${project.property("java_version")}"
     inputs.property("java_version", project.property("java_version"))
-    inputs.property("yacl_version", project.property("fmj.yacl_version"))
-    inputs.property("modmenu_version", project.property("fmj.modmenu_version"))
-
-    filesMatching("fabric.mod.json") {
-        expand(
-            "version" to inputs.properties.getValue("mod_version"),
-            "fabric_loader" to inputs.properties.getValue("loader_version"),
-            "minecraft" to inputs.properties.getValue("minecraft_version"),
-            "yacl" to inputs.properties.getValue("yacl_version"),
-            "modmenu" to inputs.properties.getValue("modmenu_version")
-        )
-    }
-
-    val mixinJava = "JAVA_${inputs.properties.getValue("java_version")}"
     filesMatching("*.mixins.json") { expand("java" to mixinJava) }
 }
 
@@ -72,7 +66,7 @@ extensions.configure<LoomGradleExtensionAPI>() {
     splitEnvironmentSourceSets()
 
     mods {
-        create("bettervanillaf3") {
+        create(rootProject.name) {
             sourceSet(sourceSets["main"])
             sourceSet(sourceSets["client"])
         }
