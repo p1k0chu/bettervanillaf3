@@ -84,7 +84,20 @@ publishMods {
     file = modJar.flatMap { it.archiveFile }
     displayName = "${property("mod_version")} for ${sc.current.version}"
     version = property("mod_version") as String
-    changelog = rootProject.file("CHANGELOG.md").readText()
+
+    val changebuilder = StringBuilder()
+    rootProject.file("CHANGELOG.md").let {
+        if (it.exists()) {
+            changebuilder.append(it.readText()).append('\n')
+        }
+    }
+    file("CHANGELOG.md")?.let {
+        if (it.exists()) {
+            changebuilder.append(it.readText())
+        }
+    }
+    changelog = if (changebuilder.isEmpty()) "* nothing" else changebuilder.toString()
+
     type = STABLE
     modLoaders.add("fabric")
 

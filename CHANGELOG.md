@@ -1,2 +1,0 @@
-* lower dependencies for libraries
-
