@@ -4,10 +4,10 @@
   "client": [
     "DebugEntryLocalDifficultyMixin",
     "DebugEntryPositionMixin",
+    "DebugOverlayMover_GuiMixin",
     "DebugScreenEntryListMixin",
     "DebugScreenOverlayAnon1Mixin",
     "DebugScreenOverlayMixin",
-    "GameRendererMixin",
     "GuiProfilerChartRenderStateMixin",
     "LevelRendererMixin",
     "ProfilerPieChartMixin"

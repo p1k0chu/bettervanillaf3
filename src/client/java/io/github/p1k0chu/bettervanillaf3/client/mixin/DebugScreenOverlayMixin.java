@@ -44,8 +44,8 @@ class DebugScreenOverlayMixin {
         });
     }
 
-    @Definition(id = "screen", field = "Lnet/minecraft/client/Minecraft;screen:Lnet/minecraft/client/gui/screens/Screen;")
-    @Expression("?.screen != null")
+    @Definition(id = "screen", method = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;")
+    @Expression("?.screen() != null")
     @ModifyExpressionValue(
             method = {
                     /*$ extractRenderStateStr */"extractRenderState"
