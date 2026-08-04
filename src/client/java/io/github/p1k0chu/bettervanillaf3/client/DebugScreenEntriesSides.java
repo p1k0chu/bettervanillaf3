@@ -21,6 +21,7 @@ public final class DebugScreenEntriesSides {
             Identifier.withDefaultNamespace("chunk_source_stats"), // chunks[c] and chunks[s]
 
             Identifier.withDefaultNamespace("player_position"),
+            Identifier.withDefaultNamespace("player_section_position"),
             Identifier.withDefaultNamespace("light_levels"),
             Identifier.withDefaultNamespace("heightmap"), // CH + SH
             Identifier.withDefaultNamespace("biome"),
@@ -30,8 +31,7 @@ public final class DebugScreenEntriesSides {
             Identifier.withDefaultNamespace("chunk_generation_stats"), // noise router + biome builder
             Identifier.withDefaultNamespace("entity_spawn_counts"), // SC
             Identifier.withDefaultNamespace("sound_mood"),
-            Identifier.withDefaultNamespace("post_effect"),
-            Identifier.withDefaultNamespace("player_section_position")
+            Identifier.withDefaultNamespace("post_effect")
     );
 
     private static final List<Identifier> rightSide = List.of(
