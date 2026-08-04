@@ -44,8 +44,8 @@ class DebugScreenOverlayMixin {
         });
     }
 
-    @Definition(id = "screen", method = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;")
-    @Expression("?.screen() != null")
+    @Definition(id = "screen", /*? >=26.2 { *//*method = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;"*//*? } else { */field = "Lnet/minecraft/client/Minecraft;screen:Lnet/minecraft/client/gui/screens/Screen;"/*? } */)
+    @Expression(/*? >=26.2 { *//*"?.screen() != null"*//*? } else { */"?.screen != null"/*? } */)
     @ModifyExpressionValue(
             method = {
                     /*$ extractRenderStateStr */"extractRenderState"
