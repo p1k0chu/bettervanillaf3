@@ -34,9 +34,10 @@ class DebugScreenOverlayMixin {
             sidedDisplayer.bettervanillaf3$beginCapture(SidedDebugScreenDisplayer.Capture.PERFORMANCE_IMPACTORS);
         } else if (identifier.equals(Identifier.withDefaultNamespace("gpu_utilization"))) {
             sidedDisplayer.bettervanillaf3$beginCapture(SidedDebugScreenDisplayer.Capture.GPU_UTILIZATION);
-        //? >=26.1
+        /*? >=26.1 { */
         } else if (identifier.equals(Identifier.withDefaultNamespace("day_count"))) {
             sidedDisplayer.bettervanillaf3$beginCapture(SidedDebugScreenDisplayer.Capture.DAY_COUNT);
+        /*? } */
         }
         if (isTargetEntry(identifier)) {
             sidedDisplayer.bettervanillaf3$markLineCount();
@@ -52,10 +53,11 @@ class DebugScreenOverlayMixin {
         if (identifier.equals(Identifier.withDefaultNamespace("simple_performance_impactors"))
                 || identifier.equals(Identifier.withDefaultNamespace("gpu_utilization"))) {
             sidedDisplayer.bettervanillaf3$endCapture();
-        //? >=26.1
+        /*? >=26.1 { */
         } else if (identifier.equals(Identifier.withDefaultNamespace("day_count"))) {
             sidedDisplayer.bettervanillaf3$endCapture();
             sidedDisplayer.bettervanillaf3$appendDayCountToLastLine();
+        /*? } */
         } else if (identifier.equals(Identifier.withDefaultNamespace("fps"))) {
             sidedDisplayer.bettervanillaf3$appendPerformanceToLastLine();
         }
