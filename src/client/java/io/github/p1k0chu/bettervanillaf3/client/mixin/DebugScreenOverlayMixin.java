@@ -28,14 +28,26 @@ import java.util.Map;
 class DebugScreenOverlayMixin {
     @Inject(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/debug/DebugScreenEntry;display(Lnet/minecraft/client/gui/components/debug/DebugScreenDisplayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/chunk/LevelChunk;)V"))
     private void setSide(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local Identifier identifier, @Local DebugScreenDisplayer displayer) {
-        ((SidedDebugScreenDisplayer) displayer).bettervanillaf3$setSide(DebugScreenEntriesSides.getSide(identifier));
+        SidedDebugScreenDisplayer sidedDisplayer = (SidedDebugScreenDisplayer) displayer;
+        sidedDisplayer.bettervanillaf3$setSide(DebugScreenEntriesSides.getSide(identifier));
+        if (identifier.equals(Identifier.withDefaultNamespace("simple_performance_impactors"))) {
+            sidedDisplayer.bettervanillaf3$beginCapture(SidedDebugScreenDisplayer.Capture.PERFORMANCE_IMPACTORS);
+        } else if (identifier.equals(Identifier.withDefaultNamespace("gpu_utilization"))) {
+            sidedDisplayer.bettervanillaf3$beginCapture(SidedDebugScreenDisplayer.Capture.GPU_UTILIZATION);
+        }
     }
 
     @Inject(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/debug/DebugScreenEntry;display(Lnet/minecraft/client/gui/components/debug/DebugScreenDisplayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/chunk/LevelChunk;)V", shift = At.Shift.AFTER))
     private void addRightSideSpacing(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local Identifier identifier, @Local DebugScreenDisplayer displayer) {
-        if (identifier.equals(Identifier.withDefaultNamespace("memory"))
-                || identifier.equals(Identifier.withDefaultNamespace("system_specs"))) {
+        if (identifier.equals(Identifier.withDefaultNamespace("memory"))) {
             displayer.addLine("");
+        }
+        SidedDebugScreenDisplayer sidedDisplayer = (SidedDebugScreenDisplayer) displayer;
+        if (identifier.equals(Identifier.withDefaultNamespace("simple_performance_impactors"))
+                || identifier.equals(Identifier.withDefaultNamespace("gpu_utilization"))) {
+            sidedDisplayer.bettervanillaf3$endCapture();
+        } else if (identifier.equals(Identifier.withDefaultNamespace("fps"))) {
+            sidedDisplayer.bettervanillaf3$appendPerformanceToLastLine();
         }
     }
 
