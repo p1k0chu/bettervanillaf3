@@ -46,6 +46,7 @@ abstract class DebugScreenOverlayAnon1Mixin implements SidedDebugScreenDisplayer
     private void addToGroup(Identifier identifier, String string, Operation<Void> original) {
         switch (this.side) {
             case LEFT -> val$leftLines.add(string);
+            case RIGHT -> val$rightLines.add(string);
             case null, default -> original.call(identifier, string);
         }
     }
@@ -54,6 +55,7 @@ abstract class DebugScreenOverlayAnon1Mixin implements SidedDebugScreenDisplayer
     private void addToGroup(Identifier identifier, Collection<String> collection, Operation<Void> original) {
         switch (this.side) {
             case LEFT -> val$leftLines.addAll(collection);
+            case RIGHT -> val$rightLines.addAll(collection);
             case null, default -> original.call(identifier, collection);
         }
     }

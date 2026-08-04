@@ -31,6 +31,14 @@ class DebugScreenOverlayMixin {
         ((SidedDebugScreenDisplayer) displayer).bettervanillaf3$setSide(DebugScreenEntriesSides.getSide(identifier));
     }
 
+    @Inject(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/debug/DebugScreenEntry;display(Lnet/minecraft/client/gui/components/debug/DebugScreenDisplayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/chunk/LevelChunk;)V", shift = At.Shift.AFTER))
+    private void addRightSideSpacing(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local Identifier identifier, @Local DebugScreenDisplayer displayer) {
+        if (identifier.equals(Identifier.withDefaultNamespace("memory"))
+                || identifier.equals(Identifier.withDefaultNamespace("system_specs"))) {
+            displayer.addLine("");
+        }
+    }
+
     @Redirect(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/ArrayList;"))
     private ArrayList<Collection<String>> fakeEmptyList4(Collection<String> c) {
         return new ArrayList<>();
