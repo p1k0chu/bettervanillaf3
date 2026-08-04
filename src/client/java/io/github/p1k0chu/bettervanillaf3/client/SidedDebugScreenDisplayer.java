@@ -21,9 +21,12 @@ public interface SidedDebugScreenDisplayer extends DebugScreenDisplayer {
 
     void bettervanillaf3$appendPerformanceToLastLine();
 
+    void bettervanillaf3$appendDayCountToLastLine();
+
     enum Capture {
         PERFORMANCE_IMPACTORS,
-        GPU_UTILIZATION
+        GPU_UTILIZATION,
+        DAY_COUNT
     }
 
     enum Side {

@@ -36,6 +36,8 @@ abstract class DebugScreenOverlayAnon1Mixin implements SidedDebugScreenDisplayer
     private final List<String> performanceImpactors = new ArrayList<>();
     @Unique
     private final List<String> gpuUtilization = new ArrayList<>();
+    @Unique
+    private final List<String> dayCount = new ArrayList<>();
 
     @WrapMethod(method = "addPriorityLine")
     private void addPriorityLine(String string, Operation<Void> original) {
@@ -114,6 +116,7 @@ abstract class DebugScreenOverlayAnon1Mixin implements SidedDebugScreenDisplayer
         switch (capture) {
             case PERFORMANCE_IMPACTORS -> this.performanceImpactors.clear();
             case GPU_UTILIZATION -> this.gpuUtilization.clear();
+            case DAY_COUNT -> this.dayCount.clear();
         }
     }
 
@@ -135,6 +138,14 @@ abstract class DebugScreenOverlayAnon1Mixin implements SidedDebugScreenDisplayer
         val$leftLines.set(last, val$leftLines.get(last) + " " + String.join(" ", additions));
     }
 
+    @Override
+    public void bettervanillaf3$appendDayCountToLastLine() {
+        if (val$leftLines.isEmpty() || this.dayCount.isEmpty()) return;
+
+        int last = val$leftLines.size() - 1;
+        val$leftLines.set(last, val$leftLines.get(last) + " (" + String.join(" ", this.dayCount) + ")");
+    }
+
     @Unique
     private boolean capture(String string) {
         if (this.capture == null) return false;
@@ -143,6 +154,7 @@ abstract class DebugScreenOverlayAnon1Mixin implements SidedDebugScreenDisplayer
                     this.performanceImpactors.isEmpty() ? string.stripLeading() : string
             );
             case GPU_UTILIZATION -> this.gpuUtilization.add(string);
+            case DAY_COUNT -> this.dayCount.add(this.dayCount.isEmpty() ? string.stripLeading() : string);
         }
         return true;
     }

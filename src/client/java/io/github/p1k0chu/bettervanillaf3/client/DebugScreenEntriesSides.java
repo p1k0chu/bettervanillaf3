@@ -31,18 +31,28 @@ public final class DebugScreenEntriesSides {
             Identifier.withDefaultNamespace("chunk_generation_stats"), // noise router + biome builder
             Identifier.withDefaultNamespace("entity_spawn_counts"), // SC
             Identifier.withDefaultNamespace("sound_mood"),
+            //? >=26.1
+            Identifier.withDefaultNamespace("sound_cache"),
             Identifier.withDefaultNamespace("post_effect")
     );
 
     private static final List<Identifier> rightSide = List.of(
             Identifier.withDefaultNamespace("memory"),
+            //? >=26.1
+            Identifier.withDefaultNamespace("detailed_memory"),
             Identifier.withDefaultNamespace("system_specs"),
             Identifier.withDefaultNamespace("gpu_utilization"),
             Identifier.withDefaultNamespace("simple_performance_impactors"),
 
             Identifier.withDefaultNamespace("looking_at_block" /*? >=26.1 >> ')' */ + "_state"),
+            //? >=26.1
+            Identifier.withDefaultNamespace("looking_at_block_tags"),
             Identifier.withDefaultNamespace("looking_at_fluid" /*? >=26.1 >> ')' */ + "_state"),
+            //? >=26.1
+            Identifier.withDefaultNamespace("looking_at_fluid_tags"),
             Identifier.withDefaultNamespace("looking_at_entity")
+            //? >=26.1
+            , Identifier.withDefaultNamespace("looking_at_entity_tags")
     );
 
     public static int compare(Identifier left, Identifier right) {
