@@ -28,6 +28,11 @@ abstract class DebugScreenOverlayAnon1Mixin implements SidedDebugScreenDisplayer
     @Nullable
     private Capture capture = null;
     @Unique
+    @Nullable
+    private Side markedSide = null;
+    @Unique
+    private int markedLineCount = -1;
+    @Unique
     private final List<String> performanceImpactors = new ArrayList<>();
     @Unique
     private final List<String> gpuUtilization = new ArrayList<>();
@@ -78,6 +83,29 @@ abstract class DebugScreenOverlayAnon1Mixin implements SidedDebugScreenDisplayer
     @Override
     public void bettervanillaf3$setSide(@Nullable Side side) {
         this.side = side;
+    }
+
+    @Override
+    public void bettervanillaf3$markLineCount() {
+        this.markedSide = this.side;
+        List<String> lines = switch (this.markedSide) {
+            case LEFT -> val$leftLines;
+            case RIGHT -> val$rightLines;
+            case null, default -> null;
+        };
+        this.markedLineCount = lines == null ? -1 : lines.size();
+    }
+
+    @Override
+    public void bettervanillaf3$addSeparatorBeforeNewLines() {
+        List<String> lines = switch (this.markedSide) {
+            case LEFT -> val$leftLines;
+            case RIGHT -> val$rightLines;
+            case null, default -> null;
+        };
+        if (lines != null && this.markedLineCount >= 0 && lines.size() > this.markedLineCount) {
+            lines.add(this.markedLineCount, "");
+        }
     }
 
     @Override

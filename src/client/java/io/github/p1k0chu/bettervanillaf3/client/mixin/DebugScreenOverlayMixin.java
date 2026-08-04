@@ -35,10 +35,13 @@ class DebugScreenOverlayMixin {
         } else if (identifier.equals(Identifier.withDefaultNamespace("gpu_utilization"))) {
             sidedDisplayer.bettervanillaf3$beginCapture(SidedDebugScreenDisplayer.Capture.GPU_UTILIZATION);
         }
+        if (isTargetEntry(identifier)) {
+            sidedDisplayer.bettervanillaf3$markLineCount();
+        }
     }
 
     @Inject(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/debug/DebugScreenEntry;display(Lnet/minecraft/client/gui/components/debug/DebugScreenDisplayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/chunk/LevelChunk;)V", shift = At.Shift.AFTER))
-    private void addRightSideSpacing(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local Identifier identifier, @Local DebugScreenDisplayer displayer) {
+    private void afterEntryDisplay(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local Identifier identifier, @Local DebugScreenDisplayer displayer) {
         if (identifier.equals(Identifier.withDefaultNamespace("memory"))) {
             displayer.addLine("");
         }
@@ -49,6 +52,25 @@ class DebugScreenOverlayMixin {
         } else if (identifier.equals(Identifier.withDefaultNamespace("fps"))) {
             sidedDisplayer.bettervanillaf3$appendPerformanceToLastLine();
         }
+        if (isTargetEntry(identifier)) {
+            sidedDisplayer.bettervanillaf3$addSeparatorBeforeNewLines();
+        }
+    }
+
+    private static boolean isTargetEntry(Identifier identifier) {
+        return identifier.equals(Identifier.withDefaultNamespace("looking_at_block" /*? >=26.1 >> ')' */ + "_state"))
+                || identifier.equals(Identifier.withDefaultNamespace("looking_at_fluid" /*? >=26.1 >> ')' */ + "_state"))
+                || identifier.equals(Identifier.withDefaultNamespace("looking_at_entity"));
+    }
+
+    @Redirect(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 0))
+    private boolean removeSeparatorBeforeLeftRegularLines(List<String> lines, Object line) {
+        return true;
+    }
+
+    @Redirect(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 2))
+    private boolean removeSeparatorAfterLeftRegularLines(List<String> lines, Object line) {
+        return true;
     }
 
     @Redirect(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/ArrayList;"))
