@@ -17,7 +17,7 @@ import java.util.List;
 @Mixin(ProfilerPieChart.class)
 class ProfilerPieChartMixin {
     @WrapWithCondition(
-            method = /*$ extractRenderStateStr >> ',' */"extractRenderState",
+            method = "extractRenderState",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;fill(IIIII)V")
     )
     private boolean hidePieChartBg(GuiGraphicsExtractor instance, int x0, int y0, int x1, int y1, int col) {
@@ -29,7 +29,7 @@ class ProfilerPieChartMixin {
      *
      */
 
-    @WrapMethod(method = /*$ extractRenderStateStr >> ')' */"extractRenderState")
+    @WrapMethod(method = "extractRenderState")
     private void scalePieChartText(GuiGraphicsExtractor graphics, Operation<Void> original) {
         graphics.pose().pushMatrix()
                 .scale(BetterVanillaF3Config.getInstance().getPieChartScale());
@@ -46,7 +46,7 @@ class ProfilerPieChartMixin {
      */
 
     @ModifyExpressionValue(
-            method = /*$ extractRenderStateStr >> ',' */"extractRenderState",
+            method = "extractRenderState",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;guiWidth()I")
     )
     private int unscaleGuiWidth(int original) {
@@ -54,7 +54,7 @@ class ProfilerPieChartMixin {
     }
 
     @ModifyExpressionValue(
-            method = /*$ extractRenderStateStr >> ',' */"extractRenderState",
+            method = "extractRenderState",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;guiHeight()I")
     )
     private int unscaleGuiHeight(int original) {
@@ -67,16 +67,10 @@ class ProfilerPieChartMixin {
      */
      
     @WrapOperation(
-            method = /*$ extractRenderStateStr >> ',' */"extractRenderState",
+            method = "extractRenderState",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;" +
-                    //? >=26.1 {
-                            "profilerChart"
-                    //? } else {
-                            /*"submitProfilerChartRenderState"
-                    *///? }
-                            + "(Ljava/util/List;IIII)V"
+                    target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;profilerChart(Ljava/util/List;IIII)V"
             )
     )
     private void scalePiePosition(GuiGraphicsExtractor instance, List<ResultField> chartData, int x0, int y0, int x1, int y1, Operation<Void> original) {

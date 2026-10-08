@@ -1,8 +1,6 @@
 package io.github.p1k0chu.bettervanillaf3.client;
 
 import net.minecraft.resources.Identifier;
-
-//$ NullableImport
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
@@ -25,7 +23,6 @@ public final class DebugScreenEntriesSides {
             Identifier.withDefaultNamespace("heightmap"), // CH + SH
             Identifier.withDefaultNamespace("biome"),
             Identifier.withDefaultNamespace("local_difficulty"),
-            //? >=26.1
             Identifier.withDefaultNamespace("day_count"),
             Identifier.withDefaultNamespace("chunk_generation_stats"), // noise router + biome builder
             Identifier.withDefaultNamespace("entity_spawn_counts"), // SC
@@ -40,8 +37,8 @@ public final class DebugScreenEntriesSides {
             Identifier.withDefaultNamespace("gpu_utilization"),
             Identifier.withDefaultNamespace("simple_performance_impactors"),
 
-            Identifier.withDefaultNamespace("looking_at_block" /*? >=26.1 >> ')' */ + "_state"),
-            Identifier.withDefaultNamespace("looking_at_fluid" /*? >=26.1 >> ')' */ + "_state"),
+            Identifier.withDefaultNamespace("looking_at_block_state"),
+            Identifier.withDefaultNamespace("looking_at_fluid_state"),
             Identifier.withDefaultNamespace("looking_at_entity")
     );
 

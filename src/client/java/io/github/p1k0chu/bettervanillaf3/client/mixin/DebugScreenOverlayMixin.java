@@ -26,17 +26,17 @@ import java.util.Map;
 
 @Mixin(DebugScreenOverlay.class)
 class DebugScreenOverlayMixin {
-    @Inject(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/debug/DebugScreenEntry;display(Lnet/minecraft/client/gui/components/debug/DebugScreenDisplayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/chunk/LevelChunk;)V"))
+    @Inject(method = "extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/debug/DebugScreenEntry;display(Lnet/minecraft/client/gui/components/debug/DebugScreenDisplayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/chunk/LevelChunk;)V"))
     private void setSide(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local Identifier identifier, @Local DebugScreenDisplayer displayer) {
         ((SidedDebugScreenDisplayer) displayer).bettervanillaf3$setSide(DebugScreenEntriesSides.getSide(identifier));
     }
 
-    @Redirect(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/ArrayList;"))
+    @Redirect(method = "extractRenderState", at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/ArrayList;"))
     private ArrayList<Collection<String>> fakeEmptyList4(Collection<String> c) {
         return new ArrayList<>();
     }
 
-    @Inject(method = /*$ extractRenderStateStr >> ','*/"extractRenderState", at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/ArrayList;"))
+    @Inject(method = "extractRenderState", at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/ArrayList;"))
     private void groupsGoToTheRight(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local Map<Identifier, Collection<String>> map, @Local(ordinal = 1) List<String> right) {
         map.forEach((ignore, strings) -> {
             right.addAll(strings);
@@ -44,18 +44,10 @@ class DebugScreenOverlayMixin {
         });
     }
 
-    //? <26.2 {
-    @Definition(id = "screen", field = "Lnet/minecraft/client/Minecraft;screen:Lnet/minecraft/client/gui/screens/Screen;")
-    @Expression("?.screen != null")
-    //? } else {
-    /*@Definition(id = "screen", method = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;")
+    @Definition(id = "screen", method = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;")
     @Expression("?.screen() != null")
-    *///? }
     @ModifyExpressionValue(
-            method = {
-                    /*$ extractRenderStateStr */"extractRenderState"
-                    /*? <1.21.11 *///, "showDebugScreen"
-            },
+            method = {"extractRenderState", "showDebugScreen"},
             at = @At("MIXINEXTRAS:EXPRESSION:FIRST")
     )
     private boolean hideEvenIfScreenIsOpen(boolean original) {
