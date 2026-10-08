@@ -10,8 +10,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-
-//$ NullableImport
 import org.jspecify.annotations.Nullable;
 
 public class BetterVanillaF3Config {
@@ -37,10 +35,8 @@ public class BetterVanillaF3Config {
     @SerialEntry
     private boolean disabledPieChartBg = false;
 
-    //? >=26.1 {
     @SerialEntry
     private boolean addDayCounterToLocalDifficulty = false;
-    //? }
 
     public Screen makeScreen(@Nullable Screen parent) {
         return YetAnotherConfigLib.createBuilder()
@@ -79,7 +75,6 @@ public class BetterVanillaF3Config {
                                                 .controller(TickBoxControllerBuilder::create)
                                                 .build()
                                 )
-                                //? >=26.1 {
                                 .option(
                                         Option.<Boolean>createBuilder()
                                                 .name(Component.literal("Day counter"))
@@ -92,7 +87,6 @@ public class BetterVanillaF3Config {
                                                 .controller(TickBoxControllerBuilder::create)
                                                 .build()
                                 )
-                                //? }
                                 .group(
                                         OptionGroup.createBuilder()
                                                 .name(Component.literal("Pie Chart"))
@@ -169,7 +163,6 @@ public class BetterVanillaF3Config {
         this.disabledPieChartBg = disabledPieChartBg;
     }
 
-    //? >=26.1 {
     public boolean isAddDayCounterToLocalDifficulty() {
         return addDayCounterToLocalDifficulty;
     }
@@ -177,5 +170,4 @@ public class BetterVanillaF3Config {
     public void setAddDayCounterToLocalDifficulty(boolean addDayCounterToLocalDifficulty) {
         this.addDayCounterToLocalDifficulty = addDayCounterToLocalDifficulty;
     }
-    //? }
 }

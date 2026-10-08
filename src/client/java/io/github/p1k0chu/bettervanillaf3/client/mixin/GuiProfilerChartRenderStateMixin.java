@@ -1,10 +1,7 @@
 package io.github.p1k0chu.bettervanillaf3.client.mixin;
 
 import io.github.p1k0chu.bettervanillaf3.client.BetterVanillaF3Config;
-//? >=26.1 {
 import net.minecraft.client.renderer.state.gui.pip.GuiProfilerChartRenderState;
-//? } else
-//import net.minecraft.client.gui.render.state.pip.GuiProfilerChartRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
