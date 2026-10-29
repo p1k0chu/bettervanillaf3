@@ -22,6 +22,7 @@ repositories {
 dependencies {
     minecraft("com.mojang:minecraft:${property("deps.minecraft")}")
     implementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
+    implementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fapi")}")
     implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")
     implementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 }
@@ -31,6 +32,7 @@ tasks.processResources {
         "version" to project.version,
         "fabric_loader" to project.property("fmj.fabric_loader"),
         "minecraft" to project.property("fmj.minecraft"),
+        "fapi" to project.property("fmj.fapi"),
         "yacl" to project.property("fmj.yacl_version"),
         "modmenu" to project.property("fmj.modmenu_version")
     )
