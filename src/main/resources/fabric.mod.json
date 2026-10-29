@@ -30,12 +30,12 @@
     }
   ],
   "depends": {
-    "fabricloader": "${fabric_loader}",
-    "minecraft": "${minecraft}",
-    "fabric-api": "${fapi}",
-    "yet_another_config_lib_v3": "${yacl}"
+    "fabricloader": ">=0.19.5",
+    "minecraft": ">=26.3",
+    "fabric-api": ">=0.165.0+26.3",
+    "yet_another_config_lib_v3": ">=3.9.7"
   },
   "recommends": {
-    "modmenu": "${modmenu}"
+    "modmenu": ">=21.0.0"
   }
 }
